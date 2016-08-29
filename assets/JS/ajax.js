@@ -107,11 +107,6 @@ function processRequest(response) {
 				
 			}
 
-			//Se retornar instrução para redirecionar, faz o redirecionamento
-			if(result.redirect) {
-				window.location.href = result.redirect, 500;
-			}
-			
 
 			//retorna as mensagens de erro/sucesso
 			if(result.message) {
@@ -133,6 +128,38 @@ function processRequest(response) {
 					}
 				}
 			}
+
+
+			//Processa a ação escolhida (redirecionar ou ficar no cadastro)
+			var action = $('[name=action]').val();
+			//Se retornar instrução para redirecionar, faz o redirecionamento
+			if(result.redirect) {
+				if(action == 'cadastro' || !action) {
+
+					//Redireciona
+					window.location.href = result.redirect, 500;
+
+				} else if(action = 'novo'){
+
+					//Reseta o formulario
+					$('.modal form').each(function(){
+						this.reset();
+					});
+
+					//Recarrega a tabela
+					var view = $('#home').data('view');
+					var target = $('#home').data('target');
+					var tab = '#home';
+					
+					loadView(view, target, tab);
+
+					//Mantem a ação selecionada e mostra o modal
+					$('[name=action]').val(action);
+					$('.modal#cadastro').modal('show');
+
+				}
+			}
+
 
 			//Para debug do que ocorre no servidor
 			if(result.debug) {

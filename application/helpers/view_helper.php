@@ -11,7 +11,7 @@ function page_title($title) {
 
 //Header modal
 function modal_header($id, $title, $tam = null) { return "
-<div id='$id' class='modal'  tabindex='-1'>
+<div id='$id' class='modal'>
 	<div class='modal-dialog ".$tam."'>
 		<div class='modal-content'>
 			<div class='modal-header'>
@@ -25,6 +25,18 @@ function modal_footer() { return "
 		</div>
 	</div>
 </div>";
+}
+
+function modal_footer_form() { return "
+	<div class='modal-footer form-inline'>
+		<button data-loading-text='Aguarde...' type='submit' class='btn btn-success'><i class='glyphicon glyphicon-ok'></i> Gravar</button>
+		<select style='width:150px; float:none; clear:both' name='action' class='form-control'>
+			<option value='cadastro'>Ir para cadastro</option>
+			<option value='novo'>Inserir novo registro</option>
+		</select>
+		<button class='btn btn-default' data-dismiss='modal'><i class='glyphicon glyphicon-remove'></i> Cancelar</button>
+	</div>
+	";
 }
 
 //Coloca um item na sidebar ativo

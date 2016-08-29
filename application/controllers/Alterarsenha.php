@@ -4,7 +4,7 @@ class Alterarsenha extends MY_Controller {
 
 	//Chama o model principal
 	public function __construct() { 
-		parent::__construct();	
+		parent::__construct(false);	
 	}
 
 	//Cadastra ou altera um registro

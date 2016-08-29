@@ -47,8 +47,8 @@
 			<label class="control-label">Situação</label>
 			<select class="select2 form-control input-sm" name="status">
 				<option></option>
-				<option <?= set_select('status', getSearch('status'), (getSearch('status') == 1)) ?> value="1">Ativo</option>
-				<option <?= set_select('status', getSearch('status'), (getSearch('status') == 2)) ?> value="2">Inativo</option>
+				<option <?= set_select('status', getSearch('status'), (getSearch('status') === '1')) ?> value="1">Ativo</option>
+				<option <?= set_select('status', getSearch('status'), (getSearch('status') === '0')) ?> value="0">Inativo</option>
 			</select>
 		</div>
 	</div>

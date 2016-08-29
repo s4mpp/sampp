@@ -17,18 +17,14 @@
 								<thead class="bg-primary">
 									<tr>
 										<th>Nome</th>
-										<th>Login</th>
-										<th>Data nasc.</th>
-										<th>Cadastrado em</th>
+										<th>Diretório</th>
 									</tr>
 								</thead>
 								<tbody><?php
 									foreach($registros->registros AS $registro) {?>
-										<tr data-click="<?= base_url('cadastros/usuarios/cadastro/'.encode($registro->id)) ?>">
-											<td><?= $registro->nome ?></td>
-											<td><?= $registro->login ?></td>
-											<td><?= dateENtoPT($registro->dn) ?></td>
-											<td><?= dateENtoPT($registro->data_hora_add) ?></td>
+										<tr data-click="<?= base_url('sampp/cadastro/'.encode($registro->id)) ?>">
+											<td><i class="<?= $registro->icone ?>"></i> <?= $registro->label ?></td>
+											<td><?= $registro->value ?></td>
 										</tr><?php
 									}?>
 								</tbody>
@@ -38,7 +34,7 @@
 					</div>
 					<div role="tabpanel" class="tab-pane" id="filtro">
 						<?= form_open(current_url(), array('method' => 'GET')); ?>
-							<?php $this->load->view('usuarios/filtro'); ?>
+							<?php $this->load->view('sampp/filtro'); ?>
 							<hr>
 							<button type="submit" class="btn btn-sm btn-sm btn-primary"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
 							<a href="<?= current_url() ?>" class="btn btn-sm btn-sm btn-default"><i class="glyphicon glyphicon-erase"></i> Limpar filtro</a>
@@ -52,11 +48,11 @@
 
 
 <?=
-modal_header('cadastro', 'Cadastrar usuário', 'modal-lg');
-	echo form_open(null, array('data-action' => base_url('cadastros/usuarios/validate'))); ?>
+modal_header('cadastro', 'Cadastrar módulo');
+	echo form_open(null, array('data-action' => base_url('sampp/validate'))); ?>
 		<div class='modal-body'>
 			<?php $data['registro'] = null;
-			$this->load->view('usuarios/form', $data); ?>
+			$this->load->view('sampp/form', $data); ?>
 		</div>
 		<div class='modal-footer'>
 			<button data-loading-text="Aguarde..." type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Gravar</button>

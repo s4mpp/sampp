@@ -9,30 +9,40 @@ class Usuarios extends MY_Controller {
 	}
 
 	//Faz a listagem dos registros
-	public function listar(int $pag = 1){
-
-		//Chama a library de paginação
-		$this->load->library('my_pagination');
+	public function index(){
 
 		//Coloca o título
-		$data['pageTitle'] = 'Usuários cadastrados';
-
-		$data['registros'] = $this->Usuarios_model->list($pag);
-		$this->my_pagination->setTotalPags($data['registros']->total);
+		$data['pageTitle'] = 'Usuarios cadastrados';
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('includes/sidebar');
-		$this->load->view('usuarios/lista');
+		$this->load->view('usuarios/index');
 		$this->load->view('includes/footer');
 		$this->load->view('includes/js_load');
 
 	}
 
+	//Chama a tabela de registros com paginação
+	public function pagination(int $pag = 1) {
+
+		is_ajax();
+
+		//Chama a library de paginação
+		$this->load->library('my_pagination');
+
+		//Carrega os registros
+		$data['registros'] = $this->Usuarios_model->list($pag);
+		$this->my_pagination->setTotalPags($data['registros']->total);
+
+		$this->load->view('usuarios/pagination', $data);
+		$this->load->view('includes/js_load');
+	}
+	
 
 	//Pagina principal do cadastro
 	public function cadastro(string $id) {
 
-		$data['pageTitle'] = 'Usuário';
+		$data['pageTitle'] = 'Usuarios';
 
 		$this->load->view('includes/header', $data);
 		$this->load->view('includes/sidebar');
@@ -47,9 +57,9 @@ class Usuarios extends MY_Controller {
 		is_ajax();
 
 		$id = decode($id);
-		$data['funcionario']['registro'] = $this->Usuarios_model->getOne($id);
+		$data['usuarios']['registro'] = $this->Usuarios_model->getOne($id);
 		$data['permissoes']['permissions'] = $this->system->get_permissoes_usuario($id);
-
+		
 		$this->load->view('usuarios/tabs', $data);
 		$this->load->view('includes/js_load');
 	}
@@ -128,7 +138,7 @@ class Usuarios extends MY_Controller {
 		is_ajax();
 		$q = $_REQUEST['q'];
 
-		$items =$this->my_crud->search('usuarios', 'id, nome', array('nome' => $q));
+		$items = $this->my_crud->search('usuarios', 'id, nome', array('nome' => $q));
 
 		$result['total_count'] = count($items);
 		$result['incomplete_results'] = false;
@@ -137,6 +147,7 @@ class Usuarios extends MY_Controller {
 		$this->output->set_content_type('text/plain')->set_output(json_encode($result));
 	
 	}
+
 
 	//Manipula e Grava as permissoes do usuario
 	public function permissoes($id) {
@@ -199,5 +210,5 @@ class Usuarios extends MY_Controller {
 			echo "<p>Houve um erro ao alterar a senha. Verifique.</p>";
 		}
 	}
- 		
+ 
 }

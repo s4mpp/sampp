@@ -95,7 +95,6 @@
     $('.telefone').mask('(99) 9999-9999?9', {placeholder: '(__) ____-____  '});
 
 
-
     $(function(){
         var formObject = $('form');
 
@@ -114,14 +113,14 @@
         }
     });
 
-/*
-    tinymce.remove();
-    tinymce.init({
-        selector: '#wysiwyg_editor',
-        language: 'pt_BR',
+    //Redireciona ao clicar em uma linha de uma tabela com o atributo data-click
+    $('tr[data-click]').on('click', function() {
+        window.location.href = $(this).data('click');
     });
-*/
 
-
+    //Paginação de resultados
+    $('.pag a.btn').on('click', function() {
+        loadView($(this).data('url'), '#lista');
+    });
 
 </script>

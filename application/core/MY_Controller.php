@@ -2,8 +2,16 @@
  
 class MY_Controller extends CI_Controller {
 
-	public function __construct() {
+	public function __construct($permissao = true) {
 		parent::__construct();
+
+ 		$this->load->library('my_security');
+ 		
+ 		$this->my_security->verif_session();
+ 		if($permissao) {
+ 			$this->my_security->verif_permission();
+ 		}
+ 		
 
 		$this->title = 'Sampp';
 
@@ -11,19 +19,6 @@ class MY_Controller extends CI_Controller {
 		$modules_nav = $this->session->userdata('modules_nav');
 		$this->menu_itens = ($modules_nav) ? $modules_nav : array();
 
-		//Permite urls sem fazer validação de permissão
-		$alloweds_url = array(
- 			'permissaonegada',
- 			'dashboard',
- 			'alterarsenha',
- 			'alterarsenha/validate',
- 			'relatorios/gerar',
- 		);
-
- 		$this->load->library('my_security');
-
- 		$this->my_security->verif_session();
- 		$this->my_security->verif_permission($alloweds_url);
  	}
 
 

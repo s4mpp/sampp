@@ -34,7 +34,7 @@ class System {
 	function get_modules($usuario) {
 
 		$permissoes = $this->get_permissoes_usuario($usuario, TRUE);
-
+		$nav = array();
 		$i = 0;
 		foreach($this->CI->System_model->get_modules() as $module) {
 
@@ -54,6 +54,7 @@ class System {
 
 			$i++;
 		}
+
 		$this->CI->session->set_userdata('modules_nav', $nav);
 	}
 

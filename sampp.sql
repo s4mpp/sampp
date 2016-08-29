@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : aws
 Source Server Version : 50627
 Source Host           : localhost:3306
 Source Database       : sampp
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2016-08-23 18:28:00
+Date: 2016-08-29 18:02:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ CREATE TABLE `instalacao` (
 -- ----------------------------
 -- Records of instalacao
 -- ----------------------------
-INSERT INTO `instalacao` VALUES ('1', 'Centro', 'SAMPP', 'Sistema Teste', 'R. Teste', '87.020-000', '10.123.456/0001-10', '1', '4121', '', '', 's/n', '2016');
+INSERT INTO `instalacao` VALUES ('1', 'Centro', 'SAMPP', 'Sistema Teste', 'R. Teste', '87.020-000', '10.123.456/0001-10', '1', '4121', '987654321', '132456789', 's/n', '2016');
 
 -- ----------------------------
 -- Table structure for `modulos`
@@ -50,14 +50,16 @@ CREATE TABLE `modulos` (
   `label` varchar(30) CHARACTER SET latin1 NOT NULL,
   `value` varchar(30) CHARACTER SET latin1 NOT NULL,
   `icone` varchar(25) CHARACTER SET latin1 NOT NULL,
+  `usuario` int(11) NOT NULL,
+  `data_hora_add` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of modulos
 -- ----------------------------
-INSERT INTO `modulos` VALUES ('1', 'Cadastros', 'cadastros', 'fa fa-file-text-o');
-INSERT INTO `modulos` VALUES ('2', 'Relatórios', 'relatorios', 'fa fa-bar-chart');
+INSERT INTO `modulos` VALUES ('1', 'Cadastros', 'cadastros', 'fa fa-file-o', '1', '2016-08-29 20:44:00');
+INSERT INTO `modulos` VALUES ('2', 'Relatórios', 'relatorios', 'fa fa-line-chart', '1', '2016-08-31 16:18:35');
 
 -- ----------------------------
 -- Table structure for `municipios`
@@ -5652,14 +5654,13 @@ CREATE TABLE `permissoes` (
   `usuario` int(11) NOT NULL,
   `submodulo` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permissoes
 -- ----------------------------
 INSERT INTO `permissoes` VALUES ('1', '1', '1');
 INSERT INTO `permissoes` VALUES ('2', '1', '2');
-INSERT INTO `permissoes` VALUES ('3', '1', '3');
 
 -- ----------------------------
 -- Table structure for `status`
@@ -5667,15 +5668,15 @@ INSERT INTO `permissoes` VALUES ('3', '1', '3');
 DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(10) DEFAULT NULL,
+  `descricao` varchar(7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of status
 -- ----------------------------
+INSERT INTO `status` VALUES ('0', 'Inativo');
 INSERT INTO `status` VALUES ('1', 'Ativo');
-INSERT INTO `status` VALUES ('2', 'Desativado');
 
 -- ----------------------------
 -- Table structure for `submodulos`
@@ -5687,15 +5688,19 @@ CREATE TABLE `submodulos` (
   `label` varchar(50) CHARACTER SET latin1 NOT NULL,
   `controller` varchar(50) CHARACTER SET latin1 NOT NULL,
   `metodo_principal` varchar(99) CHARACTER SET latin1 DEFAULT NULL,
+  `usuario` int(11) NOT NULL,
+  `data_hora_add` datetime NOT NULL,
+  `tabela` varchar(40) DEFAULT NULL,
+  `abas` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of submodulos
 -- ----------------------------
-INSERT INTO `submodulos` VALUES ('1', '1', 'Usuários', 'usuarios', 'listar');
-INSERT INTO `submodulos` VALUES ('2', '1', 'Instalação', 'instalacao', '');
-INSERT INTO `submodulos` VALUES ('3', '2', 'Usuários', 'usuarios', null);
+INSERT INTO `submodulos` VALUES ('1', '1', 'Usuários', 'usuarios', null, '1', '2016-08-29 20:45:00', 'usuarios', 'permissoes');
+INSERT INTO `submodulos` VALUES ('2', '1', 'Instalação', 'instalacao', null, '1', '2016-08-29 20:46:00', 'instalacao', null);
+INSERT INTO `submodulos` VALUES ('3', '2', 'Usuários', 'usuarios', null, '0', '0000-00-00 00:00:00', null, null);
 
 -- ----------------------------
 -- Table structure for `usuarios`
@@ -5723,4 +5728,4 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('1', null, '', 'ADMINISTRADOR', '2016-08-02', 'M', '', '', '', '1', '', 'admin', '202cb962ac59075b964b07152d234b70', '2016', '2016-08-01 02:53:55');
+INSERT INTO `usuarios` VALUES ('1', '4121', 'Centro', 'ADMINISTRADOR', '1992-10-27', 'M', '', 'Av. Brasil', 'Administrador do sistema', '1', '1552', 'admin', '202cb962ac59075b964b07152d234b70', '2016', '2016-08-01 02:53:55');

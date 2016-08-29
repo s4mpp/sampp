@@ -18,13 +18,18 @@ private function filter($filters = null) {
 		
 	}
 
+	private function join() {
+		$this->db->join('status', 'status.id = usuarios.status');
+	}
+
 	//Obtem uma listagem com paginação
 	function list() {
 		//Busca os dados
-		$this->db->select('usuarios.*');
+		$this->db->select('usuarios.*, status.descricao as status');
 		$this->db->from('usuarios');
 		$this->db->limit($this->my_pagination->getLimit());
 		$this->db->offset($this->my_pagination->getOffset());
+		$this->join();
 		$this->db->order_by('nome');
 		$this->filter();
 
@@ -34,6 +39,7 @@ private function filter($filters = null) {
 		//Faz a contagem dos registros da tabela e armazena na variavel total
 		$this->db->select('count(usuarios.id) as total');
 		$this->db->from('usuarios');
+		$this->join();
 		$this->filter();
 		$total = $this->db->get()->result()[0]->total;
 
@@ -62,7 +68,7 @@ private function filter($filters = null) {
 		$this->db->select("usuarios.*, date_format(dn, '%d/%m/%Y') as dn, municipios.nome as nome_cidade, status.descricao as status");
 		$this->db->from('usuarios');
 		$this->db->join('municipios', 'municipios.id = usuarios.cidade', 'left');
-		$this->db->join('status', 'status.id = usuarios.status');
+		$this->join();
 		$this->filter($filters);
 		$this->db->order_by('usuarios.'.$filters['ordem'], $filters['sentido']);
 

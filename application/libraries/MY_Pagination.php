@@ -36,7 +36,7 @@ class MY_Pagination {
 
 	function getPath($pag){
 		$CI =& get_instance();
-		$url = $CI->uri->slash_segment(1) . $CI->uri->slash_segment(2) . $CI->uri->slash_segment(3) . $pag;
+		$url = $CI->uri->slash_segment(1) . $CI->uri->slash_segment(2). 'pagination/'.$pag;
 
 		return base_url($url).'?'.http_build_query($_GET);
 	}

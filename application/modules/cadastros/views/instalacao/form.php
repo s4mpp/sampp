@@ -58,7 +58,7 @@
 	<div class="col-sm-3 col-md-2">
 		<div class="form-group">
 			<label class="control-label">CEP</label>
-			<input autocomplete="off" type="text" value="<?= set_value('cep', $registro['cep']) ?>" name="cep" class="form-control input-sm">
+			<input autocomplete="off" type="text" value="<?= set_value('cep', $registro['cep']) ?>" name="cep" class="form-control input-sm cep">
 		</div>
 	</div>
 </div>

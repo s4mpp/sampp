@@ -33,15 +33,17 @@ class MY_Crud {
 
 		//Verifica se foi informada a primary key (id)
 		if($pk) {
-			//Grava o usuario e a data_hora_add
-			$register['usuario'] = $this->CI->session->userdata('id');
-			$register['usuario'] = date('Y-m-d H:i');
-
 			//Salva o registro
 			$this->CI->db->where('id', $pk);
 			$save = $this->CI->db->update($tbl, $register);
 			$this->last_id = $pk;
 		} else {
+
+			//Grava o usuario e a data_hora_add
+			$register['usuario'] = $this->CI->session->userdata('id');
+			$register['data_hora_add'] = date('Y-m-d H:i');
+
+
 			//Ou insere um novo
 			$save = $this->CI->db->insert($tbl, $register);
 			$this->last_id = $this->CI->db->insert_id($tbl);

@@ -1,6 +1,6 @@
 <div class="content-wrapper">
 	<section class="content-header clearfix">
-		<h1 class="pull-left">Dashboard</h1>
+		<h1 class="pull-left"><?= $pageTitle ?></h1>
 	</section>
 	<section class="content">	
 		<div class="box box-primary">

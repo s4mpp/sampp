@@ -135,22 +135,6 @@ class Sampp extends MY_Controller {
 			
 	}
 
-	//Retorna uma listagem para ser mostrada no Select2
-	public function search() {
-
-		is_ajax();
-		$q = $_REQUEST['q'];
-
-		$items =$this->my_crud->search('usuarios', 'id, nome', array('nome' => $q));
-
-		$result['total_count'] = count($items);
-		$result['incomplete_results'] = false;
-		$result['items'] = $items;
-
-		$this->output->set_content_type('text/plain')->set_output(json_encode($result));
-	
-	}
-
 
 
 	//Valida os dados recebidos do formulário
@@ -361,7 +345,6 @@ class Sampp extends MY_Controller {
 			mkdir($viewFolder, 0777);
 
 			//Faz o caminho dos arquivos
-			$formFile = "application/modules/".$modulo_dir."/views/form_".$submodulo->controller.".php";
 			$modelFile = "application/modules/".$modulo_dir."/models/".ucfirst($submodulo->controller)."_model.php";
 			$controllerFile = "application/modules/".$modulo_dir."/controllers/".ucfirst($submodulo->controller).".php";
 			$controllerRelatorioFile = "application/modules/relatorios/controllers/".ucfirst($submodulo->controller).".php";
@@ -593,7 +576,7 @@ $html =
 <div class="content-wrapper">
 	<section class="content-header clearfix">
 		<h1 class="pull-left"><?= page_title($pageTitle) ?></h1>
-		<a data-toggle="modal" data-target="#cadastro" class="btn btn-sm btn-success pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar novo</a>
+		<a data-toggle="modal" data-target="#cadastro" class="btn btn-sm btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar novo</a>
 	</section>
 	<section class="content">	
 		<div class="box box-primary">
@@ -932,7 +915,10 @@ foreach($abas as $aba) {
 		is_ajax();
 		$q = $_REQUEST[\'q\'];
 
-		$items = $this->my_crud->search(\''.$submodulo->tabela.'\', \'id, nome\', array(\'nome\' => $q));
+		//Inicia a library MY_Crud
+		$this->load->library(\'my_crud\');
+
+		$items = $this->my_crud->search(\''.$submodulo->tabela.'\', \'id, nome\', [\'nome\', $q]);
 
 		$result[\'total_count\'] = count($items);
 		$result[\'incomplete_results\'] = false;

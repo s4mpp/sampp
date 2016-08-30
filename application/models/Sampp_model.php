@@ -54,14 +54,44 @@ private function filter($filters = null) {
 		return $this->db->get()->result_array()[0];
 	}
 
-
 	function getSubmodulesByModule($module) {
 		$this->db->select('submodulos.*');
 		$this->db->from('submodulos');
 		$this->db->where('submodulos.modulo', $module);
+		
 
 		return $this->db->get()->result();
 	}
+
+	function getSubmodules() {
+		$this->db->select('submodulos.label, submodulos.controller, modulos.value');
+		$this->db->from('submodulos');
+		$this->db->join('modulos', 'modulos.id = submodulos.modulo', 'inner');
+		
+		return $this->db->get()->result();
+	}
+
+	function getTables() {
+
+		//$this->db->list_tables();
+
+	 $tables=$this->db->query("SELECT t.TABLE_NAME AS tbl FROM INFORMATION_SCHEMA.TABLES AS t WHERE t.TABLE_SCHEMA = 'hotel'")->result_array();    
+	 foreach($tables as $key => $val) {
+	     $tbl[] = $val['tbl'];
+	 }
+
+	 return $tbl;
+	
+	}
+
+	function getColumns($table) {
+		
+		return $this->db->query("SHOW COLUMNS FROM $table")->result();
+
+	}
+
+
+	
 
 
 }

@@ -138,7 +138,10 @@ class Usuarios extends MY_Controller {
 		is_ajax();
 		$q = $_REQUEST['q'];
 
-		$items = $this->my_crud->search('usuarios', 'id, nome', array('nome' => $q));
+		//Inicia a library MY_Crud
+		$this->load->library('my_crud');
+
+		$items = $this->my_crud->search('usuarios', 'id, nome', ['nome', $q]);
 
 		$result['total_count'] = count($items);
 		$result['incomplete_results'] = false;

@@ -82,11 +82,8 @@ class MY_Crud {
 		$this->CI->db->select($fields);
 		$this->CI->db->from($tbl);
 		$this->CI->db->like($like[0], $like[1]);
-		if($pk) {
-			$this->CI->db->where($pk[0], $pk[1]);
-			return $this->CI->db->get()->result()[0];
-		} else {
-			return $this->CI->db->get()->result();
-		}
+		
+		return $this->CI->db->get()->result();
+		
 	}
 }

@@ -1,7 +1,7 @@
 <div class="content-wrapper">
 	<section class="content-header clearfix">
 		<h1 class="pull-left"><?= page_title($pageTitle) ?></h1>
-		<a data-toggle="modal" data-target="#cadastro" class="btn btn-sm btn-success pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar novo</a>
+		<a data-toggle="modal" data-target="#cadastro" class="btn btn-sm btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar novo</a>
 	</section>
 	<section class="content">	
 		<div class="box box-primary">

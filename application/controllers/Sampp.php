@@ -649,9 +649,11 @@ $html ='
 
 $abas = explode(',', $submodulo->abas);
 foreach($abas as $aba) {
-	$html .= 
-	'<li role="presentation"><a href="#'.str_replace(' ', '', trim($aba)).'" data-toggle="tab">'.ucfirst(trim($aba)).'</a></li>
-	';
+	if(!empty($aba)) {
+		$html .= 
+		'<li role="presentation"><a href="#'.str_replace(' ', '', trim($aba)).'" data-toggle="tab">'.ucfirst(trim($aba)).'</a></li>
+		';
+	}
 }
 
 	$html .= '
@@ -668,16 +670,15 @@ foreach($abas as $aba) {
 	';
 
 foreach($abas as $aba) {
-	$html .= 
-	'
-	<!-- '.ucfirst(trim($aba)).' -->
-	<div role="tabpanel" class="tab-pane" id="'.str_replace(' ', '', trim($aba)).'">
-		<?= form_open(null, array(\'data-action\' => base_url(\''.$modulo_dir.'/'.str_replace(' ', '', trim($aba)).'/validate/\'.$this->uri->segment(4))));
+	if(!empty($aba)) {
+		$html .= 
+		'
+		<!-- '.ucfirst(trim($aba)).' -->
+		<div role="tabpanel" class="tab-pane" id="'.str_replace(' ', '', trim($aba)).'">
 			//$this->load->view(\''.$submodulo->controller.'/'.str_replace(' ', '', trim($aba)).'\', $'.str_replace(' ', '', trim($aba)).'); ?>
-			<button data-loading-text="Aguarde..." type="submit" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ok"></i> Gravar</button>
-		<?=	form_close() ?>
-	</div>
-	';
+		</div>
+		';
+	}
 }
 
 		$html .= '

@@ -396,7 +396,7 @@ class Sampp extends MY_Controller {
 			fclose($view);
 
 
-			return 'Módulo '.$submodulo->label.' criado com sucesso';
+			return 'Submódulo '.$submodulo->label.' criado com sucesso';
 		}
 	}
 

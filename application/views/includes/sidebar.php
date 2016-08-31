@@ -21,10 +21,14 @@
 
 			//Criador de módulos
 			if($this->session->userdata('id')) { ?>
-				<li class="treeview <?= active('sampp', 1); ?>">
-					<a href="<?= base_url('sampp/listar') ?>">
+				<li class="treeview <?= active('sampp', 1) . '' . active('samppform', 1); ?>">
+					<a href="">
 						<i class="fa fa-cog"></i> <span>Sampp</span> <i class="fa fa-angle-right pull-right"></i>
 					</a>
+					<ul class="treeview-menu">
+						<li class="<?= active('listar', 2); ?>"><a href="<?= base_url('sampp/listar') ?>"><i class="glyphicon glyphicon-menu-right"></i> Gerador de módulos</a></li>
+						<li class="<?= active('samppform', 2); ?>"><a href="<?= base_url('samppform') ?>"><i class="glyphicon glyphicon-menu-right"></i> Gerador de formulários</a></li>
+					</ul>
 				</li><?php
 			}?>
 		</ul>

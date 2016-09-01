@@ -268,7 +268,7 @@ class Sampp extends MY_Controller {
 			$fields['id'] = array('type' => 'int', 'auto_increment' => true);
 			$fields['nome'] = array('type' => 'varchar', 'constraint' => '55', 'null' => true);
 			$fields['obs'] = array('type' => 'text', 'null' => true);
-			$fields['status'] = array('type' => 'int', 'null' => false);
+			$fields['status'] = array('type' => 'tinyint', 'null' => false);
 			$fields['usuario'] = array('type' => 'int');
 			$fields['data_hora_add'] = array('type' => 'datetime');
 
@@ -735,6 +735,14 @@ class '.ucfirst($submodulo->controller).'_model extends CI_Model {
 		return $this->db->get()->result_array()[0];
 	}
 
+	//Obtem uma lista com todos os registros
+	function list_all() {
+		$this->db->select(\''.$submodulo->tabela.'.id, '.$submodulo->tabela.'.nome\');
+		$this->db->from(\''.$submodulo->tabela.'\');
+
+		return $this->db->get()->result();
+	}
+
 
 	//Gera dados para o relatorio
 	public function report($filters) {
@@ -802,7 +810,7 @@ class '.ucfirst($submodulo->controller).' extends MY_Controller {
 	}
 
 	//Chama a tabela de registros com paginação
-	public function pagination(int $pag = 1) {
+	public function pagination() {
 
 		is_ajax();
 
@@ -810,7 +818,7 @@ class '.ucfirst($submodulo->controller).' extends MY_Controller {
 		$this->load->library(\'my_pagination\');
 
 		//Carrega os registros
-		$data[\'registros\'] = $this->'.ucfirst($submodulo->controller).'_model->list($pag);
+		$data[\'registros\'] = $this->'.ucfirst($submodulo->controller).'_model->list();
 		$this->my_pagination->setTotalPags($data[\'registros\']->total);
 
 		$this->load->view(\''.$submodulo->controller.'/pagination\', $data);

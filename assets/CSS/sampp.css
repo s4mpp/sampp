@@ -26,8 +26,8 @@ span.select2 {width:100%!important;}
 
 .loading {margin:10px auto;
     border:7px solid #f1f2f3; 
-    border-top: 7px solid #ccc;
-    border-bottom: 7px solid green;
+    border-top: 7px solid #337AB7;
+    border-bottom: 7px solid #00A65A;
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -39,6 +39,9 @@ span.select2 {width:100%!important;}
 
 section.content-header h1 {padding-top:5px;}
 section.content {padding-top:5px}
+
+fieldset {border:1px solid #999; padding:0 10px; margin-bottom:10px; background-color:#f1f2f3}
+fieldset legend {border:none; font-size:14px; width:auto; padding:0px 5px; margin-bottom:0; background-color:#f1f2f3}
 
 form .row {padding:0 10px}
 form .row > div {padding:5px}

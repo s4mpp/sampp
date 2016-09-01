@@ -77,6 +77,10 @@ function datePTtoEN($datePT) {
 }
 
 
+function format_money($money) {
+	return number_format($money, 2, ',', '.');
+}
+
 //Verifica se o valor existe no array e retorna o que desejar (return)
 function exist($valor, $array, $return = null) {
 	$array = (!is_array($array)) ? array() : $array;

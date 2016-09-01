@@ -123,4 +123,11 @@
         loadView($(this).data('url'), '#lista');
     });
 
+    //Fecha modal com ESC
+    $(document).keydown(function(e) {
+        if (e.keyCode == 27) {
+            $('.modal').modal('hide');
+        }
+    });
+
 </script>
